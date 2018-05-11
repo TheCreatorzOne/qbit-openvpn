@@ -1,7 +1,7 @@
 FROM ubuntu:xenial
 MAINTAINER TheCreatorzOne
 
-RUN apt-get update && \
+RUN apt-get update -y && \
     apt-get install build-essential && \
     pkg-config && \
     automake && \
