@@ -34,7 +34,7 @@ RUN apt-get -y update && \
     make install
 
 RUN git clone https://github.com/qbittorrent/qBittorrent && \
-    cd qbittorrent && \
+    cd qBittorrent && \
     ./configure --disable-gui && \
     make -j$(nproc) && \
     make install
