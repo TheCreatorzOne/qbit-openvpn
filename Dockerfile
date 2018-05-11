@@ -28,11 +28,7 @@ RUN apt-get -y update && \
 
     git checkout $(git tag | grep libtorrent-1_0_ | sort -t _ -n -k 3 | tail -n 1) && \
     ./autotool.sh && \
-    ./configure && \
-    --disable-debug && \
-    --enable-encryption && \
-    --with-libgeoip=system && \
-    CXXFLAGS=-std=c++11 && \
+    ./configure --disable-debug --enable-encryption --with-libgeoip=system CXXFLAGS=-std=c++11 && \
 
     make clean && make -j$(nproc) && \
     make install
