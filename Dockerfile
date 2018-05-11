@@ -3,25 +3,25 @@ MAINTAINER TheCreatorzOne
 
 RUN apt-get -y update && \
     apt-get -y install build-essential && \
-    pkg-config && \
-    automake && \
-    libtool && \
-    git
+    apt-get -y install pkg-config && \
+    apt-get -y install automake && \
+    apt-get -y install libtool && \
+    apt-get -y install git
 
-RUN apt-get install libboost-dev && \
-    libboost-system-dev && \
-    libboost-chrono-dev && \
-    libboost-random-dev && \
-    libssl-dev && \
-    libgeoip-dev
+RUN apt-get -y install libboost-dev && \
+    apt-get -y install libboost-system-dev && \
+    apt-get -y install libboost-chrono-dev && \
+    apt-get -y install libboost-random-dev && \
+    apt-get -y install libssl-dev && \
+    apt-get -y install libgeoip-dev
 
-RUN apt-get install qtbase5-dev && \
-    qttools5-dev-tools && \
-    libqt5svg5-dev
+RUN apt-get -y install qtbase5-dev && \
+    apt-get -y install qttools5-dev-tools && \
+    apt-get -y install libqt5svg5-dev
 
-RUN apt-get install python3
+RUN apt-get -y install python3
 
-RUN apt-get install libtorrent-rasterbar-dev
+RUN apt-get -y install libtorrent-rasterbar-dev
 
 RUN git clone https://github.com/arvidn/libtorrent.git && cd libtorrent
 
@@ -34,13 +34,13 @@ RUN git checkout $(git tag | grep libtorrent-1_0_ | sort -t _ -n -k 3 | tail -n 
     CXXFLAGS=-std=c++11
 
 RUN make clean && make -j$(nproc) && \
-     make install
+    make install
 
 RUN git clone https://github.com/qbittorrent/qBittorrent && \
     cd qbittorrent && \
     ./configure --disable-gui && \
     make -j$(nproc) && \
-     make install'
+    make install'
 
 RUN addgroup --gid 1000 qbittorrent && \
     adduser --uid 1000 --ingroup qbittorrent --home /qbittorrent --shell /bin/bash --disabled-password --gecos "" qbittorrent && \
