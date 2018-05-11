@@ -46,7 +46,7 @@ RUN addgroup --gid 1000 qbittorrent && \
     mkdir /downloads && \
     chmod go+rw -R /qBittorrent /downloads && \
     ln -s /qbittorrent/.config/qBittorrent /config && \
-    ln -s /qbittorrent/.local/share/data/qBittorrent /torrents && \
+    ln -s /qbittorrent/.local/share/data/qBittorrent /torrents
 
 COPY qBittorrent.conf /default/qBittorrent.conf
 COPY entrypoint.sh /
