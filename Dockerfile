@@ -1,7 +1,8 @@
 FROM ubuntu:xenial
 MAINTAINER TheCreatorzOne
 
-RUN apt-get install build-essential && \
+RUN apt-get update && \
+    apt-get install build-essential && \
     pkg-config && \
     automake && \
     libtool && \
