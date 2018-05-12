@@ -1,0 +1,33 @@
+FROM ubuntu:xenial
+MAINTAINER TheCreatorzOne
+
+ENV USER_ID 1000
+ENV GROUP_ID 1000
+ENV DEPENDENCIES build-essential geoip-database pkg-config automake libtool git libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev qtbase5-dev qttools5-dev-tools libqt5svg5-dev python3 libtorrent-rasterbar-dev
+
+RUN apt-get -y update && apt-get -y install $DEPENDENCIES && \
+    git clone https://github.com/arvidn/libtorrent.git && \
+    cd libtorrent && \
+    git checkout $(git tag | grep libtorrent-1_0_ | sort -t _ -n -k 3 | tail -n 1) && \
+    ./autotool.sh && \
+    ./configure --disable-debug --enable-encryption --with-libgeoip=system CXXFLAGS=-std=c++11 && \
+    make clean && make -j$(nproc) && \
+    make install && \
+    git clone https://github.com/qbittorrent/qBittorrent && \
+    cd qBittorrent && \
+    ./configure --disable-gui --enable-debug && \
+    make -j$(nproc) && \
+    make install
+
+ADD qBittorrent.conf /config/qBittorrent.conf
+ADD entrypoint.sh /entrypoint.sh
+
+RUN apt-get update && apt-get install -y dos2unix && dos2unix /entrypoint.sh
+
+VOLUME ["/config", "/torrents", "/downloads"]
+
+EXPOSE 8999 6881
+
+ENTRYPOINT ["/entrypoint.sh"]
+
+CMD ["qbittorrent-nox"]

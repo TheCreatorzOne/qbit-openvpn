@@ -3,29 +3,27 @@ MAINTAINER TheCreatorzOne
 
 ENV USER_ID 1000
 ENV GROUP_ID 1000
-ENV DEPENDENCIES build-essential pkg-config automake libtool git libboost-dev libboost-system-dev libboost-chrono-dev libboost-random-dev libssl-dev libgeoip-dev qtbase5-dev qttools5-dev-tools libqt5svg5-dev python3 libtorrent-rasterbar-dev
 
-RUN apt-get -y update && apt-get -y install $DEPENDENCIES && \
-    git clone https://github.com/arvidn/libtorrent.git && \
-    cd libtorrent && \
-    git checkout $(git tag | grep libtorrent-1_0_ | sort -t _ -n -k 3 | tail -n 1) && \
-    ./autotool.sh && \
-    ./configure --disable-debug --enable-encryption --with-libgeoip=system CXXFLAGS=-std=c++11 && \
-    make clean && make -j$(nproc) && \
-    make install && \
-    git clone https://github.com/qbittorrent/qBittorrent && \
-    cd qBittorrent && \
-    ./configure --disable-gui --enable-debug && \
-    make -j$(nproc) && \
-    make install && \
-
-COPY qBittorrent.conf /config/qBittorrent.conf
-COPY ./entrypoint.sh /
+RUN apt-get update && \
+    apt-get install -y qbittorrent-nox && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
+    addgroup --gid 1000 qbittorrent && adduser --uid 1000 --ingroup qbittorrent --shell /bin/bash --disabled-password --gecos "" qbittorrent && \
+    mkdir -p /home/qbittorrent/.config/qBittorrent && \
+    mkdir -p /home/qbittorrent/.local/share/data/qBittorrent && \
+    chown -R qbittorrent:qbittorrent /home/qbittorrent/ && \
+    ln -s /home/qbittorrent/.config/qBittorrent /config && \
+    ln -s /home/qbittorrent/.local/share/data/qBittorrent /torrents && \
+    mkdir /downloads && \
+    chown qbittorrent:qbittorrent /downloads
 
 VOLUME ["/config", "/torrents", "/downloads"]
 
-EXPOSE 8080 6881
+ADD qBittorrent.conf /default/qBittorrent.conf
 
-ENTRYPOINT ["/entrypoint.sh"]
+EXPOSE 8080
+EXPOSE 6881
+
+USER qbittorrent
 
 CMD ["qbittorrent-nox"]

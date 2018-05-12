@@ -4,3 +4,5 @@ README.md
 .git
 .gitattributes
 Dockerfile-old
+Dockerfile-old2
+entrypoint.sh
