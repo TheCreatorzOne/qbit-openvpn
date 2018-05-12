@@ -14,7 +14,7 @@ RUN apt-get update && \
     ln -s /qbittorrent/.local/share/data/qBittorrent /torrents && \
     mkdir /downloads && \
     chown qbittorrent:qbittorrent /downloads && \
-    chmod go+rw -R /qBittorrent /downloads
+    chmod go+rw -R /qbittorrent /downloads
 
 VOLUME ["/config", "/torrents", "/downloads"]
 
