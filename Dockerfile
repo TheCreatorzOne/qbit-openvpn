@@ -13,6 +13,7 @@ RUN apt-get update && \
     ln -s /qbittorrent/.config/qBittorrent /config && \
     ln -s /qbittorrent/.local/share/data/qBittorrent /torrents && \
     mkdir /downloads && \
+    ln -s /downloads /qbittorrent/downloads && \
     chown qbittorrent:qbittorrent /downloads && \
     chmod go+rw -R /qbittorrent /downloads
 
