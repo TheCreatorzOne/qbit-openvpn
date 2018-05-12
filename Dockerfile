@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf"]
 
-EXPOSE ["8080", "6881"]
+EXPOSE 8080 6881
 
 WORKDIR /qbittorrent
 
