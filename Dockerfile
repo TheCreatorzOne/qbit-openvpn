@@ -19,7 +19,7 @@ RUN apt-get update && \
 
 VOLUME ["/config", "/torrents", "/downloads"]
 
-COPY qBittorrent.conf /config/qBittorrent.conf
+ADD qBittorrent.conf /config/qBittorrent.conf
 
 EXPOSE 8080
 EXPOSE 6881
