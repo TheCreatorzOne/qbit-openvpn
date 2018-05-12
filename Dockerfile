@@ -17,12 +17,9 @@ RUN apt-get update && \
     chown qbittorrent:qbittorrent /downloads && \
     chmod go+rw -R /qbittorrent /downloads
 
-VOLUME ["/config", "/torrents", "/qbittorrent/downloads"]
+VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf"]
 
-ADD qBittorrent.conf /config/qBittorrent.conf
-
-EXPOSE 8080
-EXPOSE 6881
+EXPOSE ["8080", "6881"]
 
 WORKDIR /qbittorrent
 
