@@ -17,7 +17,7 @@ RUN apt-get update && \
     chown qbittorrent:qbittorrent /downloads && \
     chmod go+rw -R /qbittorrent /downloads
 
-VOLUME ["/config", "/torrents", "qbittorrent/downloads"]
+VOLUME ["/config", "/torrents", "/qbittorrent/downloads"]
 
 ADD qBittorrent.conf /config/qBittorrent.conf
 
