@@ -11,12 +11,12 @@ RUN apt-get update && \
     ln -s /qbittorrent/.local/share/data/qBittorrent /torrents && \
     mkdir /downloads && \
     mkdir /downloads/temp && \
-    ln -s /downloads /qbittorrent/downloads && \
-    ln -s /downloads/tmep /qbittorrent/downloads/temp && \
+    ln -s /downloads /qbittorrent/Downloads && \
+    ln -s /downloads/temp /qbittorrent/Downloads/temp && \
     chown -R qbittorrent /downloads /downloads/temp && \
     chmod 2777 -R /qbittorrent /downloads /downloads/temp
 
-VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf", "/qbittorrent/downloads/temp"]
+VOLUME ["/config", "/torrents", "/qbittorrent/Downloads", "/config/qBittorrent.conf", "/qbittorrent/Downloads/temp"]
 
 EXPOSE 8080 6881
 
