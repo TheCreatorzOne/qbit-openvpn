@@ -3,7 +3,7 @@ MAINTAINER TheCreatorzOne
 
 RUN apt-get update && \
     apt-get install -y qbittorrent-nox && \
-    useradd -m -d /qbittorrent qbittorrent
+    useradd -m -d /qbittorrent qbittorrent && \
     chown -R qbittorrent /qbittorrent && \
     mkdir -p /qbittorrent/.config/qBittorrent && \
     mkdir -p /qbittorrent/.local/share/data/qBittorrent && \
