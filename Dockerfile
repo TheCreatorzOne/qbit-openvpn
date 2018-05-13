@@ -3,7 +3,7 @@ MAINTAINER TheCreatorzOne
 
 RUN apt-get update && \
     apt-get install -y qbittorrent-nox && \
-    addgroup --gid 1000 qbittorrent && adduser --uid 1000 --ingroup qbittorrent --gid 1000 --home /qbittorrent --shell /bin/bash --disabled-password --gecos "" qbittorrent && \
+    addgroup --gid 1000 qbittorrent && adduser --uid 1000 --gid 1000 --home /qbittorrent --shell /bin/bash --disabled-password --gecos "" qbittorrent && \
     mkdir -p /qbittorrent/.config/qBittorrent && \
     mkdir -p /qbittorrent/.local/share/data/qBittorrent && \
     chown -R 1000:1000 /qbittorrent && \
@@ -12,7 +12,7 @@ RUN apt-get update && \
     mkdir /downloads && \
     ln -s /downloads /qbittorrent/downloads && \
     chown 1000:1000 /downloads && \
-    chmod 7777 -R /qbittorrent /downloads
+    chmod 2777 -R /qbittorrent /downloads
 
 VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf"]
 
