@@ -18,6 +18,8 @@ VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.c
 
 EXPOSE 8080 6881
 
+USER qbittorrent
+
 WORKDIR /qbittorrent
 
 CMD ["qbittorrent-nox"]
