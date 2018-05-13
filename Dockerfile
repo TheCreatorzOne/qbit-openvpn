@@ -3,10 +3,10 @@ MAINTAINER TheCreatorzOne
 
 RUN apt-get update && \
     apt-get install -y qbittorrent-nox && \
-    addgroup --gid 1000 qbittorrent && adduser --uid 1000 --gid 1000 --home /qbittorrent --shell /bin/bash --disabled-password --gecos "" qbittorrent && \
+    useradd -m -d /qbittorrent qbittorrent
+    chown -R qbittorrent /qbittorrent && \
     mkdir -p /qbittorrent/.config/qBittorrent && \
     mkdir -p /qbittorrent/.local/share/data/qBittorrent && \
-    chown -R qbittorrent /qbittorrent && \
     ln -s /qbittorrent/.config/qBittorrent /config && \
     ln -s /qbittorrent/.local/share/data/qBittorrent /torrents && \
     mkdir /downloads && \
