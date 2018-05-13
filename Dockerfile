@@ -16,7 +16,7 @@ RUN apt-get update && \
     chown -R qbittorrent /downloads /downloads/temp && \
     chmod 2777 -R /qbittorrent /downloads /downloads/temp
 
-VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf", "qbittorrent/downloads/temp"]
+VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.conf", "/qbittorrent/downloads/temp"]
 
 EXPOSE 8080 6881
 
