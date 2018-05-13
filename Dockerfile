@@ -18,7 +18,7 @@ VOLUME ["/config", "/torrents", "/qbittorrent/downloads", "/config/qBittorrent.c
 
 EXPOSE 8080 6881
 
-USER 1000:1000
+USER qbittorrent
 
 WORKDIR /qbittorrent
 
