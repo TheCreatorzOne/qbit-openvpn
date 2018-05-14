@@ -2,6 +2,7 @@ FROM ubuntu:xenial
 MAINTAINER TheCreatorzOne
 
 RUN apt-get update && \
+    apt-get install -y unrar && \
     apt-get install -y qbittorrent-nox && \
     useradd -m -d /qbittorrent qbittorrent && \
     chown -R qbittorrent /qbittorrent && \
